@@ -7,7 +7,16 @@
         <p class="mr-5">Lokasi</p>
         <p class="mr-10">Tentang Kami</p>
         <button class="flex items-center text-white bg-[#F46A06] py-3 px-5 mr-4"><img src="/asset/icon/wa.png" class="w-[24px] mr-2" alt="">Whatsapp</button>
-        <button class="flex items-center text-white bg-[#F46A06] py-3 px-9">Sign In</button>
+        @auth
+        <div>
+            <form action="/logout" method="post">
+                @csrf
+                <button type="submit" class="flex items-center text-white bg-red-500 py-3 px-9">Keluar</button>
+            </form>
+        </div>
+        @else
+        <button class="flex items-center text-white bg-[#F46A06] py-3 px-9"><a href="/login">Masuk</a></button>
+        @endauth
     </div>
     </div>
 </nav>
