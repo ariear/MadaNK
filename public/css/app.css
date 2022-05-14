@@ -525,6 +525,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-20 {
   height: 5rem;
 }
+.h-2 {
+  height: 0.5rem;
+}
+.h-4 {
+  height: 1rem;
+}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -542,6 +548,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-\[24px\] {
   width: 24px;
+}
+.w-max {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 }
 .items-center {
   align-items: center;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\FoodMenu;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,9 @@ class FoodMenuController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.foodmenu.create',[
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -35,7 +38,7 @@ class FoodMenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
