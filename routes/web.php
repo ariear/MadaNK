@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FoodMenuController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,5 @@ Route::post('/register', [LoginController::class,'store_register']);
 Route::get('/dashboard', function () {
     return view('dashboard.index');
 })->middleware('auth');
+
+Route::resource('/dashboard/foodmenu', FoodMenuController::class)->middleware('auth');
