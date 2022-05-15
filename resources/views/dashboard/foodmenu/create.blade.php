@@ -1,7 +1,7 @@
 @extends('dashboard.app')
 @section('content')
 <div class="pt-4">
-    <form action="/dashboard/foodmenu" method="post">
+    <form action="/dashboard/foodmenu" method="post" enctype="multipart/form-data">
     @csrf
     <div class="col-lg-4 col-sm-6">
     <h4 class="mb-5">Tambah Menu Makanan / Minuman</h4>
@@ -15,7 +15,7 @@
     </div>
     <div class="mb-4">
         <label class="my-1 me-2" for="country">Country</label>
-        <select class="form-select" id="country" aria-label="Default select example">
+        <select name="category_id" class="form-select" id="country" aria-label="Default select example">
             <option selected>Buka untuk melihat menu</option>
             @foreach ($categories as $category)
             <option value="{{ $category->id }}">{{ $category->category }}</option>

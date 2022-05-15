@@ -15,7 +15,9 @@ class FoodMenuController extends Controller
      */
     public function index()
     {
-        return view('dashboard.foodmenu.index');
+        return view('dashboard.foodmenu.index',[
+            'foodmenus' => FoodMenu::latest()->get()
+        ]);
     }
 
     /**
@@ -38,7 +40,23 @@ class FoodMenuController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $validasi = $request->validate([
+            'img' => 'image|file',
+            'name' => 'required|max:50',
+            'category_id' => 'required',
+            'desc' => 'required|max:255',
+            'price' => 'required|numeric',
+            'stock' => 'required|numeric'
+        ]);
+
+        $validasi['slug'] = str()->slug($validasi['name']);
+
+        if($request->file('img')){
+            $validasi['img'] = $request->file('img')->store('image-menu');
+        }
+        FoodMenu::create($validasi);
+
+        return redirect('/dashboard/foodmenu')->with('success','Makanan Berhasil ditambahkan');
     }
 
     /**

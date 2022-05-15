@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FoodMenuController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,4 @@ Route::get('/dashboard', function () {
 })->middleware('auth');
 
 Route::resource('/dashboard/foodmenu', FoodMenuController::class)->middleware('auth');
+Route::resource('/dashboard/categories', CategoryController::class)->middleware('auth');
