@@ -45,8 +45,16 @@
                         {{ $foodmenu->stock }}
                     </td>
                     <td>
-                        <button class="btn btn-warning">Edit</button>
-                        <button class="btn btn-danger">Hapus</button>
+                        <a href="/dashboard/foodmenu/{{ $foodmenu->id }}/edit">
+                            <button class="btn btn-warning">Edit</button>
+                        </a>
+                        <div class="d-inline-block">
+                        <form action="/dashboard/foodmenu/{{ $foodmenu->id }}" method="post">
+                        @method('delete')
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                        </form>
+                        </div>
                     </td>
                 </tr>
                 @endforeach

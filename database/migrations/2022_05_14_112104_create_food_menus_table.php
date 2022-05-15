@@ -18,10 +18,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('desc');
-            $table->string('img');
+            $table->string('img')->nullable();
             $table->integer('price');
             $table->integer('stock');
             $table->foreignId('category_id');
+            $table->string('type');
             $table->timestamps();
         });
     }

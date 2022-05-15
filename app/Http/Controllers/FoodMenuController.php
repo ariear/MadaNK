@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\FoodMenu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FoodMenuController extends Controller
 {
@@ -43,6 +44,7 @@ class FoodMenuController extends Controller
         $validasi = $request->validate([
             'img' => 'image|file',
             'name' => 'required|max:50',
+            'type' => 'required',
             'category_id' => 'required',
             'desc' => 'required|max:255',
             'price' => 'required|numeric',
@@ -76,9 +78,14 @@ class FoodMenuController extends Controller
      * @param  \App\Models\FoodMenu  $foodMenu
      * @return \Illuminate\Http\Response
      */
-    public function edit(FoodMenu $foodMenu)
+    public function edit($id)
     {
-        //
+        $foodMenu = FoodMenu::firstWhere('id',$id);
+
+        return view('dashboard.foodmenu.edit',[
+            'categories' => Category::all(),
+            'foodmenu' => $foodMenu
+        ]);
     }
 
     /**
@@ -88,9 +95,30 @@ class FoodMenuController extends Controller
      * @param  \App\Models\FoodMenu  $foodMenu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FoodMenu $foodMenu)
+    public function update(Request $request, $id)
     {
-        //
+        $validasi = $request->validate([
+            'name' => 'required|max:50',
+            'type' => 'required',
+            'category_id' => 'required',
+            'desc' => 'required|max:255',
+            'price' => 'required|numeric',
+            'stock' => 'required|numeric'
+        ]);
+
+        $validasi['slug'] = str()->slug($request->name);
+
+        if ($request->file('img')) {
+            if ($request->oldImg) {
+                Storage::delete($request->oldImg);
+            }
+            $validasi['img'] = $request->file('img')->store('image-menu');
+        }
+
+        $foodMenu = FoodMenu::firstWhere('id', $id);
+        $foodMenu->update($validasi);
+
+        return redirect('/dashboard/foodmenu')->with('success','Menu Berhasil Dihapus');
     }
 
     /**
@@ -99,8 +127,14 @@ class FoodMenuController extends Controller
      * @param  \App\Models\FoodMenu  $foodMenu
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FoodMenu $foodMenu)
+    public function destroy($id)
     {
-        //
+        $foodMenu = FoodMenu::where('id', $id)->first();
+        if ($foodMenu->img) {
+            Storage::delete($foodMenu->img);
+        }
+        $foodMenu->delete();
+
+        return back()->with('success','Menu Berhasil DiHapus');
     }
 }

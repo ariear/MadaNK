@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\FoodMenuController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +19,9 @@ Route::post('/register', [LoginController::class,'store_register']);
 
 Route::get('/dashboard', function () {
     return view('dashboard.index');
-})->middleware('auth');
+})->middleware('owner');
 
-Route::resource('/dashboard/foodmenu', FoodMenuController::class)->middleware('auth');
-Route::resource('/dashboard/categories', CategoryController::class)->middleware('auth');
+Route::resource('/dashboard/foodmenu', FoodMenuController::class)->middleware('owner');
+Route::resource('/dashboard/categories', CategoryController::class)->middleware('owner');
+
+Route::resource('/dashboard/users', DashboardUserController::class)->middleware('admin');

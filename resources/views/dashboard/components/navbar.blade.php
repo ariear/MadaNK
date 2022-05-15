@@ -8,7 +8,7 @@
               <div class="media d-flex align-items-center">
                 <img class="avatar rounded-circle" alt="Image placeholder" src="https://i.pinimg.com/550x/ed/60/2a/ed602ab2749ea589836513f8045b10fb.jpg">
                 <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
-                  <span class="mb-0 font-small fw-bold text-gray-900">Bonnie Green</span>
+                  <span class="mb-0 font-small fw-bold text-gray-900">{{ auth()->user()->name }}</span>
                 </div>
               </div>
             </a>

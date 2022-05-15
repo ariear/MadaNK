@@ -6,7 +6,15 @@
         <p class="mr-5">Menu Makanan</p>
         <p class="mr-5">Lokasi</p>
         <p class="mr-10">Tentang Kami</p>
-        <button class="flex items-center text-white bg-[#F46A06] py-3 px-5 mr-4"><img src="/asset/icon/wa.png" class="w-[24px] mr-2" alt="">Whatsapp</button>
+        @can('owner')
+        <a href="/dashboard">
+        <div class="bg-[#df6b18d2] p-2">
+            <img src="/asset/icon/icon-dashboard.png" width="30" alt="">
+        </div>
+        </a>
+        @endcan
+
+        <button class="flex items-center text-white bg-[#F46A06] py-3 px-5 mx-4"><img src="/asset/icon/wa.png" class="w-[24px] mr-2" alt="">Whatsapp</button>
         @auth
         <div>
             <form action="/logout" method="post">
