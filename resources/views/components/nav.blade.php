@@ -2,8 +2,8 @@
     <div class="container px-5 mx-auto flex items-center justify-between">
     <p class="text-3xl font-quicksans font-bold">Mada<span class="text-[#F46A06]">NX</span></p>
     <div class="font-roboto font-medium text-[#F46A06] flex items-center">
-        <p class="mr-5">Home</p>
-        <p class="mr-5">Menu Makanan</p>
+        <a href="/"><p class="mr-5">Home</p></a>
+        <a href="/foodsmenu"><p class="mr-5">Menu Makanan</p></a>
         <p class="mr-5">Lokasi</p>
         <p class="mr-10">Tentang Kami</p>
         @can('owner')
