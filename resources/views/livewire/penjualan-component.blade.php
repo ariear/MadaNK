@@ -1,6 +1,6 @@
-<div class="pt-4">
+<div>
 <h4 class="mb-5">Penjualan</h4>
-<div class="row">
+<div class="row mb-4">
     <div class="col-4 bg-white py-4 ms-2 rounded-2">
         <div class="input-group">
             <input type="search" wire:model="search" class="form-control" placeholder="Search" >
@@ -50,6 +50,36 @@
                 </tbody>
             </table>
             {!!  $foodsmenu->links()  !!}
+        </div>
+    </div>
+</div>
+<div class="row ms-1">
+    <div class="col-11 bg-white rounded-3">
+        <div class="table-responsive">
+            <table class="table table-centered table-nowrap mb-0 rounded">
+                <thead class="thead-light">
+                    <tr>
+                        <th class="border-0 rounded-start">No</th>
+                        <th class="border-0">Menu</th>
+                        <th class="border-0">Qty</th>
+                        <th class="border-0">Harga</th>
+                        <th class="border-0">Total</th>
+                        <th class="border-0 rounded-end">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($keranjangs as $keranjang)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $keranjang->foodmenu->name }}</td>
+                            <td>{{ $keranjang->qty }}</td>
+                            <td>{{ $keranjang->foodmenu->price }}</td>
+                            <td>{{ $keranjang->total }}</td>
+                            <td><button wire:click="deleteToChart({{ $keranjang }})" class="btn btn-danger">Hapus</button></td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
