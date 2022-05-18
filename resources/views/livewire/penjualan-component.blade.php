@@ -1,3 +1,4 @@
+<div class="pt-4">
 <h4 class="mb-5">Penjualan</h4>
 <div class="row">
     <div class="col-4 bg-white py-4 ms-2 rounded-2">
@@ -23,7 +24,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($foodsmenu as $food)
+                    @forelse ($foodsmenu as $food)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $food->name }}</td>
@@ -35,10 +36,21 @@
                         <td>{{ $food->stock }}</td>
                         <td><button class="btn btn-warning">Add</button></td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Menu Belum Tersedia</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
-            {{  $foodsmenu->links()  }}
+            {!!  $foodsmenu->links()  !!}
         </div>
     </div>
+</div>
 </div>
