@@ -34,7 +34,7 @@
                         <td>{{ $food->category->category }}</td>
                         <td>{{ $food->price }}</td>
                         <td>{{ $food->stock }}</td>
-                        <td><button class="btn btn-warning">Add</button></td>
+                        <td><button class="btn btn-warning" wire:click="addToChart({{ $food->id }})">Add</button></td>
                     </tr>
                     @empty
                     <tr>

@@ -19,6 +19,14 @@ class PenjualanComponent extends Component
         $this->resetPage();
     }
 
+    public function addToChart($id){
+        $foodmenu = FoodMenu::firstWhere('id', $id);
+
+        $foodmenu->update([
+            'stock' => $foodmenu->stock - 1
+        ]);
+    }
+
     public function render()
     {
         return view('livewire.penjualan-component',[
