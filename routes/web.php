@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardPenjualanController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\FoodMenuController;
 use App\Http\Controllers\LoginController;
@@ -25,5 +26,6 @@ Route::get('/dashboard', function () {
 
 Route::resource('/dashboard/foodmenu', FoodMenuController::class)->middleware('owner');
 Route::resource('/dashboard/categories', CategoryController::class)->middleware('owner');
+Route::resource('/dashboard/penjualan', DashboardPenjualanController::class)->middleware('owner');
 
 Route::resource('/dashboard/users', DashboardUserController::class)->middleware('admin');

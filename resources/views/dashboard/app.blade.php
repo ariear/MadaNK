@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- Primary Meta Tags -->
-<title>Volt - Free Bootstrap 5 Dashboard</title>
+<title>MadaNK Dashboard</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="title" content="Volt - Free Bootstrap 5 Dashboard">
 <meta name="author" content="Themesberg">
@@ -39,7 +39,7 @@
 <link type="text/css" href="{{ asset('css/volt.css') }}" rel="stylesheet">
 
 <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
-
+@livewireStyles
 </head>
 
 <body>
@@ -63,6 +63,7 @@
 
         </main>
 
+        @livewireScripts
     <!-- Core -->
 <script src="{{ asset('js/@popperjs/core/dist/umd/popper.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap/dist/js/bootstrap.min.js') }}"></script>
