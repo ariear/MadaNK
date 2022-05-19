@@ -32,7 +32,7 @@
                             <img src="{{ asset('storage/' . $food->img) }}" width="70" alt="">
                         </td>
                         <td>{{ $food->category->category }}</td>
-                        <td>{{ $food->price }}</td>
+                        <td>{{ number_format($food->price) }}</td>
                         <td>{{ $food->stock }}</td>
                         <td><button class="btn btn-warning" wire:click="addToChart({{ $food->id }})">Add</button></td>
                     </tr>
@@ -72,12 +72,48 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $keranjang->foodmenu->name }}</td>
-                            <td>{{ $keranjang->qty }}</td>
-                            <td>{{ $keranjang->foodmenu->price }}</td>
-                            <td>{{ $keranjang->total }}</td>
+                            <td>
+                                @if ($keranjang->qty > 1)
+                                <button class="btn btn-danger btn-sm" wire:click="decrementQty({{ $keranjang }})">-</button>
+                                @endif
+                                {{ $keranjang->qty }}
+                                @if ($keranjang->foodmenu->stock > 0)
+                                <button class="btn btn-success btn-sm" wire:click="incrementQty({{ $keranjang }})">+</button>
+                                @endif
+                            </td>
+                            <td>{{ number_format($keranjang->foodmenu->price) }}</td>
+                            <td>{{ number_format($keranjang->total) }}</td>
                             <td><button wire:click="deleteToChart({{ $keranjang }})" class="btn btn-danger">Hapus</button></td>
                         </tr>
                     @endforeach
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Total Pembelian</td>
+                            <td>{{ number_format($keranjangs->sum('total')) }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Pembayaran</td>
+                            <td><input type="number" wire:model="bayar" class="form-control" style="width: 200px"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Kembalian</td>
+                            <td>
+                                @if ($bayar != '')
+                                {{ $bayar - $keranjangs->sum('total') }}
+                                @endif
+                            </td>
+                            <td></td>
+                        </tr>
                 </tbody>
             </table>
         </div>

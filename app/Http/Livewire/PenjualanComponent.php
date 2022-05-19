@@ -14,6 +14,7 @@ class PenjualanComponent extends Component
 
     public $search;
     protected $queryString = ['search'];
+    public $bayar;
 
     public function updatingSearch()
     {
@@ -21,6 +22,13 @@ class PenjualanComponent extends Component
     }
 
     public function addToChart($id){
+        $keranjangManual = KeranjangManual::all();
+        foreach ($keranjangManual as $key => $value) {
+            if ($value->foodmenu->id == $id) {
+                return false;
+            }
+        }
+
         $foodmenu = FoodMenu::firstWhere('id', $id);
 
         KeranjangManual::create([
@@ -42,6 +50,29 @@ class PenjualanComponent extends Component
 
         $deleteKeranjang = KeranjangManual::firstWhere('id', $keranjang['id']);
         $deleteKeranjang->delete();
+    }
+
+    public function incrementQty ($keranjang){
+        $addQtyKeranjang = KeranjangManual::with('foodmenu')->find($keranjang['id']);
+        $addQtyKeranjang->update([
+            'qty' => $addQtyKeranjang->qty + 1,
+            'total' => $addQtyKeranjang->foodmenu->price * ($addQtyKeranjang->qty + 1)
+        ]);
+
+        $addQtyKeranjang->foodmenu->update([
+            'stock' => $addQtyKeranjang->foodmenu->stock - 1
+        ]);
+    }
+    public function decrementQty ($keranjang){
+        $decreQtyKeranjang = KeranjangManual::with('foodmenu')->find($keranjang['id']);
+        $decreQtyKeranjang->update([
+            'qty' => $decreQtyKeranjang->qty - 1,
+            'total' => $decreQtyKeranjang->total - $decreQtyKeranjang->foodmenu->price
+        ]);
+
+        $decreQtyKeranjang->foodmenu->update([
+            'stock' => $decreQtyKeranjang->foodmenu->stock + 1
+        ]);
     }
 
     public function render()
