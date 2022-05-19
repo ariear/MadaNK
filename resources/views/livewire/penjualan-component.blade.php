@@ -114,6 +114,14 @@
                             </td>
                             <td></td>
                         </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><button class="btn btn-primary" wire:click="bayar">Bayar</button></td>
+                            <td></td>
+                        </tr>
                 </tbody>
             </table>
         </div>

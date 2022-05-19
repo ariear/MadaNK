@@ -4,6 +4,9 @@ namespace App\Http\Livewire;
 
 use App\Models\FoodMenu;
 use App\Models\KeranjangManual;
+use App\Models\TransactionManual;
+use App\Models\TransactionManualFood;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -73,6 +76,31 @@ class PenjualanComponent extends Component
         $decreQtyKeranjang->foodmenu->update([
             'stock' => $decreQtyKeranjang->foodmenu->stock + 1
         ]);
+    }
+
+    public function bayar(){
+        $keranjang = KeranjangManual::with('foodmenu');
+
+        $transaction = TransactionManual::create([
+            'no_order' => '00'. date('Ymd'). rand(1111,9999),
+            'nama_kasir' => auth()->user()->name,
+            'grand_total' => $keranjang->sum('total'),
+            'pembayaran' => $this->bayar,
+            'kembalian' => $this->bayar - $keranjang->sum('total')
+        ]);
+
+        foreach ($keranjang as $key => $value) {
+            TransactionManualFood::create([
+                'transaction_id' => $transaction->id,
+                'foodmenu_id' => $keranjang->foodmenu_id,
+                'qty' => $value->qty,
+                'total' => $value->total,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+        }
+
+        KeranjangManual::truncate();
     }
 
     public function render()
