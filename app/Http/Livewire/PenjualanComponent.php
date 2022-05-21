@@ -90,17 +90,21 @@ class PenjualanComponent extends Component
         ]);
 
         foreach ($keranjang as $key => $value) {
-            TransactionManualFood::create([
+            $order = array(
                 'transaction_id' => $transaction->id,
                 'foodmenu_id' => $keranjang->foodmenu_id,
                 'qty' => $value->qty,
                 'total' => $value->total,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
-            ]);
+            );
+
+            $transactionManual = TransactionManualFood::insert($order);
         }
 
         KeranjangManual::truncate();
+
+        return redirect('dashboard/penjualan/invoice/' . $transaction->no_order);
     }
 
     public function render()
