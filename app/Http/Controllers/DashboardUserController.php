@@ -14,7 +14,9 @@ class DashboardUserController extends Controller
      */
     public function index()
     {
-        return view('dashboard.user.index');
+        return view('dashboard.user.index', [
+            'users' => User::all()
+        ]);
     }
 
     /**
@@ -57,7 +59,11 @@ class DashboardUserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $role = ['Admin','Owner','Customer'];
+        return view('dashboard.user.edit',[
+            'user' => $user,
+            'roles' => $role
+        ]);
     }
 
     /**
@@ -69,7 +75,15 @@ class DashboardUserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $validate = $request->validate(([
+            'name' => 'required|max:50',
+            'email' => 'required|email:dns',
+            'role' => 'required'
+        ]));
+
+        $user->update($validate);
+
+        return redirect('/dashboard/users')->with('success', 'User berhasil di perbarui');
     }
 
     /**
@@ -80,6 +94,8 @@ class DashboardUserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->back()->with('success', 'User berhasil di hapus');
     }
 }

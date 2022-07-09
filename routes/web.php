@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardPenjualanController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\FoodMenuController;
@@ -21,9 +22,7 @@ Route::post('/logout', [LoginController::class,'logout']);
 Route::get('/register', [LoginController::class,'register'])->middleware('guest');
 Route::post('/register', [LoginController::class,'store_register']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-})->middleware('owner');
+Route::get('/dashboard', [DashboardController::class,'index'])->middleware('owner');
 
 Route::resource('/dashboard/foodmenu', FoodMenuController::class)->middleware('owner');
 Route::resource('/dashboard/categories', CategoryController::class)->middleware('owner');
