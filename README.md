@@ -1,5 +1,6 @@
 # MadaNK
 ----
+### ON PROGRESS!!
 Halo semua 👋 , kali ini saya akan memberikan source code project saya yang saya beri nama MadaNK , website ini berguna untuk anda yang ingin menjadikan warung atau restoran anda menjadi lebih moderen dan tidak ketinggalan zaman , anda bisa mengelola makanan , pesanan kasir maupun online(on progress) , pegawai dll di website ini  
 
 ## Showcase 
