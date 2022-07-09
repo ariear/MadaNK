@@ -109,7 +109,7 @@
                             <td>Kembalian</td>
                             <td>
                                 @if ($bayar != '')
-                                {{ $bayar - $keranjangs->sum('total') }}
+                                {{ number_format($bayar - $keranjangs->sum('total')) }}
                                 @endif
                             </td>
                             <td></td>
