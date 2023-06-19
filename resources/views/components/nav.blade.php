@@ -4,7 +4,7 @@
     <div class="font-roboto font-medium text-[#F46A06] flex items-center">
         <a href="/"><p class="mr-5">Home</p></a>
         <a href="/foodsmenu"><p class="mr-5">Menu Makanan</p></a>
-        <p class="mr-5">Lokasi</p>
+        <a href="/location"><p class="mr-5">Lokasi</p></a>
         <p class="mr-10">Tentang Kami</p>
         @can('owner')
         <a href="/dashboard">

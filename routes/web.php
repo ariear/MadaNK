@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardPenjualanController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\FoodMenuController;
 use App\Http\Controllers\InvoiceDashboardController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuFoodController;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,7 @@ Route::get('/', function () {
     return view('home');
 });
 Route::get('/foodsmenu', [MenuFoodController::class,'index']);
+Route::get('/location', [LocationController::class,'index']);
 
 Route::get('/login', [LoginController::class,'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class,'store']);

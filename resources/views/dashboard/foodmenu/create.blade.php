@@ -28,7 +28,7 @@
     </div>
     </div>
     <div class="mb-4">
-        <label class="my-1 me-2" for="country">Country</label>
+        <label class="my-1 me-2" for="country">Kategori</label>
         <select name="category_id" class="form-select" id="country" aria-label="Default select example">
             <option selected>Buka untuk melihat menu</option>
             @foreach ($categories as $category)
